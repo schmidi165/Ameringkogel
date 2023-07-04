@@ -22,6 +22,16 @@ namespace UserManagement.Controllers
             return Ok(users);
         }
 
+        [HttpGet, Route("{id:Int}")]
+        public async Task<IActionResult> GetUserById(int id)
+        {
+            var user = await _userService.GetUserById(id);
+            if (user == null)
+                return NotFound();
+
+            return Ok(user);
+        }
+
         [HttpPut, Route("{id:Int}")]
         public async Task<IActionResult> UpdateUser(int id, UserDTO user)
         {
